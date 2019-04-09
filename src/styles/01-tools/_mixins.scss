@@ -1,0 +1,57 @@
+///
+/// @name clearfix
+///
+/// Mixin para inserir o hack
+/// clearfix nos elementos com float
+///
+/// @example sass
+/// .class {
+///   @include clearfix()
+/// }
+///
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+    line-height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+///
+/// @name scrollbars
+///
+/// Mixin para estilizar a barra de rolagem
+///
+/// @example sass
+///   @include scrollbars()
+///
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, white,  50%)
+) {
+  // For Google Chrome
+  ::-webkit-scrollbar {
+    height: $size;
+    width:  $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}

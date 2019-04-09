@@ -1,0 +1,268 @@
+///
+/// Utilitário para aplicação do mixin clearfix
+///
+/// @example html
+///   <div class="clearfix">content</div>
+///
+.u-clearfix {
+  @include clearfix();
+}
+
+///
+/// Utilitário para esconder um elemento da estrutura
+/// do documento
+///
+/// @example html
+///   <div class="hidden">box</div>
+///
+.u-hidden {
+  display: none;
+  visibility: hidden;
+}
+
+///
+/// Utilitário para adicionar flex container
+/// e propriedades para os seus itens
+///
+/// @example html
+///   <div class="u-flex">content</div>
+///   <!-- display: flex -->
+///
+/// @example html
+///   <div class="u-flex-wrap-nowrap">content</div>
+///   <!-- flex-wrap: nowrap -->
+///
+/// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+///
+.u-flex {
+  display: flex;
+
+  &-flex {
+    @for $i from 1 through 10 {
+      &-#{$i} {
+        flex: $i;
+      }
+    }
+  }
+
+  /// (flex container)
+  &-flex-direction {
+    @each $option in row, row-reverse, column, column-reverse {
+      &-#{$option} { flex-direction: $option; }
+    }
+  }
+
+  &-flex-wrap {
+    @each $option in nowrap, wrap, wrap-reverse {
+      &-#{$option} { flex-wrap: $option; }
+    }
+  }
+
+  &-justify-content {
+    @each $option in flex-start, flex-end, center, space-between, space-around, space-evenly {
+      &-#{$option} { justify-content: $option; }
+    }
+  }
+
+  &-align-items {
+    @each $option in flex-start, flex-end, center, baseline, stretch {
+      &-#{$option} { align-items: $option; }
+    }
+  }
+
+  &-align-content {
+    @each $option in flex-start, flex-end, center, space-between, space-around, stretch {
+      &-#{$option} { align-content: $option; }
+    }
+  }
+
+  /// (flex item)
+  &-order {
+    @for $i from 0 through 10 {
+      &-#{$i} { order: $i; }
+    }
+  }
+
+  &-flex-grow {
+    @for $i from 0 through 10 {
+      &-#{$i} { flex-grow: $i; }
+    }
+  }
+
+  &-flex-shrink {
+    @for $i from 0 through 10 {
+      &-#{$i} { flex-shrink: $i; }
+    }
+  }
+
+  &-align-self {
+    @each $option in auto, flex-start, flex-end, center, baseline, stretch {
+      &-#{$option} { align-self: $option; }
+    }
+  }
+}
+
+///
+/// Utilitário para adicionar margin baseados
+/// na unidade base "rem" ao elemento
+///
+/// @example html
+///   <div class="u-margin-top-1">content</div>
+///   <!-- margin-top: 1rem -->
+///
+/// @example html
+///   <div class="u-margin-right-5">content</div>
+///   <!-- margin-right: 5rem -->
+///
+/// @example html
+///   <div class="u-margin-3">content</div>
+///   <!-- margin: 3rem -->
+///
+.u-margin {
+  @each $side in top, right, bottom, left {
+    @for $i from 0 through 5 {
+      &-#{$i} { margin: 1rem * $i; }
+
+      &-#{$side} {
+        &-#{$i} { margin-#{$side}: 1rem * $i; }
+      }
+    }
+  }
+}
+
+///
+/// Utilitário para adicionar padding baseados
+/// na unidade base "rem" ao elemento
+///
+/// @example html
+///   <div class="u-padding-top-1">content</div>
+///   <!-- padding-top: 1rem -->
+///
+/// @example html
+///   <div class="u-padding-right-5">content</div>
+///   <!-- padding-right: 5rem -->
+///
+/// @example html
+///   <div class="u-padding-3">content</div>
+///   <!-- padding: 3rem -->
+///
+.u-padding {
+  @each $side in top, right, bottom, left {
+    @for $i from 0 through 5 {
+      &-#{$i} { padding: 1rem * $i; }
+
+      &-#{$side} {
+        &-#{$i} { padding-#{$side}: 1rem * $i; }
+      }
+    }
+  }
+}
+
+///
+/// Utilitário para adicionar position ao elemento
+///
+/// @example html
+///   <div class="u-position-relative">content</div>
+///   <!-- position: relative; -->
+///
+.u-position {
+  @each $posValue in relative, absolute, fixed, static {
+    &-#{$posValue} {
+      position: $posValue;
+    }
+  }
+}
+///
+/// Utilitário para alinhar texto
+///
+/// @example html
+///   <div class="u-text-align-center">content</div>
+///   <!-- text-align: center; -->
+///
+.u-text-align {
+  @each $option in center, left, right {
+    &-#{$option} {
+      text-align: $option;
+    }
+  }
+}
+
+///
+/// Utilitário para tornar qualquer imagem responsiva
+///
+/// @example html
+///   <img class="u-responsive-img" src="" />
+///
+.u-responsive-img {
+  display: block;
+  max-width: 100%;
+}
+
+///
+/// Utilitário para definir elemento decoration para formatação do texto
+///
+/// @example html
+///   <div class="u-text-decoration-underline">content</div>
+///   <!-- text-decoration: underline; -->
+///
+.u-text-decoration {
+  @each $option in underline, none {
+    &-#{$option} { text-decoration: $option; }
+  }
+}
+
+///
+/// Utilitário para realizar o hover de determinado texto
+///
+/// @example html
+///   <div class="u-text-hover-decoration-underline">content</div>
+///   <!-- text-decoration: underline; -->
+/// Novas regras de hover podem ser criadas aqui
+.u-text-hover {
+  &-decoration{
+    @each $option in underline {
+      &-#{$option}:hover { text-decoration: $option; }
+    }
+  }
+}
+
+/// Utilitário para text transform
+///
+/// @example html
+///   <div class="u-text-transform-capitalize">content</div>
+///   <!-- text-transform: capitalize; -->
+/// Novas regras de hover podem ser criadas aqui
+.u-text-capitalize {
+  text-transform: capitalize;
+  &-transform {
+    @each $option in capitalize {
+      &-#{$option} {
+        text-transform: $option;
+      }
+    }
+  }
+}
+
+///
+/// Utilitário para adicionar max-width ou max-height
+/// ao elemento
+///
+/// @example html
+///   <div class="u-max-width-25">content</div>
+///   <!-- max-width: 25%; -->
+///
+/// @example html
+///   <div class="u-max-height-50">content</div>
+///   <!-- max-height: 50%; -->
+///
+.u-max {
+  @each $attr in width, height {
+    @for $i from 0 through 100 {
+      &-#{$attr} {
+        &-#{$i} {
+          max-#{$attr}: 1% * $i;
+        }
+      }
+    }
+  }
+}
